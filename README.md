@@ -9,9 +9,14 @@ This COVID API provides up-to-date information about COVID-19 cases by country. 
 - Retrieve COVID-19 case data for a specific country.
 - Get a list of available countries with COVID-19 data.
 
-## Setup
+## API Availability
 
-### Requirements
+The API is available at the following link: [COVID API](https://covidapi-zm9v.onrender.com)
+
+You can access the endpoints detailed in the API Endpoints section using this URL.
+
+
+### Libraries
 
 - Python 3
 - Flask
