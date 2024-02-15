@@ -112,7 +112,7 @@ def get_dates():
     # Connect to the database
     conn = psycopg2.connect(**db_config)
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
+    #
     try:
         query = """
         SELECT distinct(date) FROM covid_cases
