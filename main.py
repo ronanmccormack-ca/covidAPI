@@ -107,5 +107,40 @@ def get_countries():
 
     return jsonify(result)
 
+@app.route('/v1/dates')
+def get_dates():
+    # Connect to the database
+    conn = psycopg2.connect(**db_config)
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+    # Execute your query using a parameterized statement
+    try:
+        query = """
+        SELECT distinct(date) FROM covid_cases
+        order by date asc
+        """
+        cursor.execute(query)
+
+        # Fetch all rows as a list of dictionaries
+        rows = cursor.fetchall()
+
+        # If no data found for the country, return 404
+        if not rows:
+            abort(404, description=f"No data found for dates")
+
+    except psycopg2.Error as e:
+        # Handle database errors
+        cursor.close()
+        conn.close()
+        abort(500, description=str(e))
+
+    # Convert to list of dictionaries for JSON output
+    result = [dict(row) for row in rows]
+
+    cursor.close()
+    conn.close()
+
+    return jsonify(result)
+
 if __name__ == '__main__':
     app.run(debug=False)
