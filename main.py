@@ -36,7 +36,7 @@ def get_country_data(country_name):
         # SQL query
         query = """
         SELECT * FROM covid_cases 
-        JOIN countries ON countries.country_id = covid_cases.country_id 
+        JOIN countries ON countries.name = covid_cases.name
         WHERE LOWER(countries.name) = LOWER(%s)
         """
         params = [country_name]
